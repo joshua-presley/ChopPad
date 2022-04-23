@@ -1,0 +1,27 @@
+.grid-container{
+    display: grid;
+    resize: vertical;
+    border: 5px dotted black;
+    height: 90vh;
+    margin: 5px;
+}
+.NewMaterial{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.DevelopingMaterial{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.PerformanceMaterial{
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.Technique{
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+.Musicianship{
+    grid-column-start: 5;
+    grid-column-end: 6;
+}

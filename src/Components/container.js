@@ -13,9 +13,10 @@ class Container extends Component{
     render(){
         return (
             <div className="container">
-                <p>{this.name} is at postion {this.position}</p>
+                <p className="title">{this.name} is at postion {this.position}</p>
             </div>
         );
     }
 }
+
 export default Container;
