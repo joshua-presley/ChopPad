@@ -6,36 +6,49 @@ class Container extends Component{
 
     constructor(props){
         super(props);
-        this.name = props.name;
-        this.position = props.position;
+        this.title = props.title;
     }
 
-    render(){
+    CreateTitleBar(){
         return (
-            <div className="container">
-                <p className="title">{this.name} is at postion {this.position}</p>
-            </div>
+            <h1>{this.title}</h1>
         );
+    }    
+    CreateListOfItems(items){
+        return (
+            <div>
+                {super.CreateTitleBar()}
+                <ul>
+                    {items.map((item) =>
+                        <li className='NewMaterial' key={item.name}>
+                            {item.name} is at postition {item.index}
+                        </li>
+                    )}
+                </ul>
+            </div>
+        )
     }
+    render(){
+        return <Container CreateTitleBar={this.CreateTitleBar()}/>
+    }
+
+
 }
 
 class NewMaterial extends Container{
 
     constructor(props){
         super(props);
+        this.listOfItems = props.listOfItems
     }
 
-    render(){
+    render() {
         //fetch from database or somewhere
-        const items = [new NewMaterialItem('test', '1'), new NewMaterialItem('test1', '2'), new NewMaterialItem('test2', '3')]
         return (
-            <ul className='NewMaterial'>
-                {items.map((item) =>
-                    <li key={item.name}>
-                        {item.name} is at postition {item.index}
-                    </li>
-                )}
-            </ul>
+            <div>
+                {super.CreateTitleBar()}
+                {super.CreateListOfItems(this.listOfItems)}
+            </div>
         )
     }
 }

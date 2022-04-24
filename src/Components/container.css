@@ -12,3 +12,15 @@
 .title{
     font-weight: bold;
 }
+.NewMaterial{
+    background: rgb(170, 168, 168);
+    border: 1px solid rgb(0, 0, 0);
+    float: none;
+    font-size: 16px;
+    line-height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
