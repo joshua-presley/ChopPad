@@ -19,4 +19,36 @@ class Container extends Component{
     }
 }
 
-export default Container;
+class NewMaterial extends Container{
+
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        //fetch from database or somewhere
+        const items = [new NewMaterialItem('test', '1'), new NewMaterialItem('test1', '2'), new NewMaterialItem('test2', '3')]
+        return (
+            <ul className='NewMaterial'>
+                {items.map((item) =>
+                    <li key={item.name}>
+                        {item.name} is at postition {item.index}
+                    </li>
+                )}
+            </ul>
+        )
+    }
+}
+
+class NewMaterialItem{
+    constructor(name, index){
+        this.name = name;
+        this.index = index
+    }
+
+}
+
+export {
+    Container,
+    NewMaterial,
+}

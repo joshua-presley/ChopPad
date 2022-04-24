@@ -6,7 +6,6 @@ class Grid extends Component{
     constructor(props){
         super(props);
         this.newMaterialContainer = props.newMaterialContainer;
-        
     }
 
 
