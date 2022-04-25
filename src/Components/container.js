@@ -7,6 +7,8 @@ class Container extends Component{
     constructor(props){
         super(props);
         this.title = props.title;
+        this.listOfItems = props.listOfItems;
+
     }
 
     CreateTitleBar(){
@@ -14,12 +16,12 @@ class Container extends Component{
             <h1>{this.title}</h1>
         );
     }    
-    CreateListOfItems(items){
+    CreateListOfItems(){
         return (
             <div>
-                {super.CreateTitleBar()}
+                {this.CreateTitleBar()}
                 <ul>
-                    {items.map((item) =>
+                    {this.listOfItems.map((item) =>
                         <li className='NewMaterial' key={item.name}>
                             {item.name} is at postition {item.index}
                         </li>
@@ -28,9 +30,16 @@ class Container extends Component{
             </div>
         )
     }
+
+    AddNewItem(item){
+        this.listOfItems.push(item);
+    }
+    
     render(){
         return <Container CreateTitleBar={this.CreateTitleBar()}/>
     }
+
+    
 
 
 }
@@ -39,29 +48,52 @@ class NewMaterial extends Container{
 
     constructor(props){
         super(props);
-        this.listOfItems = props.listOfItems
+        this.state = {listofItems: super.listOfItems};
+        this.AddNewItem = this.AddNewItem.bind(this);
     }
-
     render() {
         //fetch from database or somewhere
         return (
             <div>
-                {super.CreateTitleBar()}
-                {super.CreateListOfItems(this.listOfItems)}
+                {super.CreateListOfItems()}
+                <button onClick={this.AddNewItem}>Add</button>
             </div>
         )
+    }
+
+    AddNewItem(e){
+        this.setState({listOfItems: this.listOfItems.push(new NewMaterialItem('test', '4'))})
     }
 }
 
 class NewMaterialItem{
     constructor(name, index){
         this.name = name;
-        this.index = index
+        this.index = index;
+        
+    }
+}
+
+class DevelopingMaterial extends Container{
+    constructor(props){
+        super(props);
     }
 
+    
+
+    render(){
+        return (
+            <div>
+                {super.CreateListOfItems()}
+            </div>
+        );
+    }
+    
 }
 
 export {
     Container,
     NewMaterial,
+    NewMaterialItem,
+
 }
