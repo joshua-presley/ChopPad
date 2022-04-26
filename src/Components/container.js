@@ -1,5 +1,9 @@
 import './container.css'
-import { Component } from 'react';
+import React from 'react'
+import { ReactDOM } from 'react';
+import { Component, useEffect, useState,  } from 'react';
+import Modal from './modal';
+
 
 //This component will hold information for a song to be practiced. perhaps subclass this?
 class Container extends Component{
@@ -48,7 +52,10 @@ class NewMaterial extends Container{
 
     constructor(props){
         super(props);
-        this.state = {listofItems: super.listOfItems};
+        this.state = {
+            listofItems: super.listOfItems,
+            showModal: false
+        };
         this.AddNewItem = this.AddNewItem.bind(this);
     }
     render() {
@@ -56,15 +63,24 @@ class NewMaterial extends Container{
         return (
             <div>
                 {super.CreateListOfItems()}
-                <button onClick={this.AddNewItem}>Add</button>
+                <button onClick={e => {this.ShowModal(e);}}>Show Modal</button>
+                {<Modal onClose = {this.ShowModal} show = {this.state.showModal}>Message</Modal>}
             </div>
         )
     }
 
-    AddNewItem(e){
-        this.setState({listOfItems: this.listOfItems.push(new NewMaterialItem('test', '4'))})
+    ShowModal = e =>{
+        this.setState({
+            listOfItems: this.listOfItems,
+            showModal: !this.state.showModal,
+        })
     }
+
+    // AddNewItem(e){
+    //     this.setState({listOfItems: this.listOfItems.push(new NewMaterialItem('test', '4'))})
+    // }
 }
+
 
 class NewMaterialItem{
     constructor(name, index){

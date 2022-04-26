@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Container, { NewMaterial, NewMaterialItem } from './Components/container'
 import React from 'react';
+import ReactDOM from 'react'
 import Grid from './Components/grid'
 
 
