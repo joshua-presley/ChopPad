@@ -54,25 +54,31 @@ class NewMaterial extends Container{
         super(props);
         this.state = {
             listofItems: super.listOfItems,
-            show: false
+            show: false,
+            name: '',
+
         };
         this.AddNewItem = this.AddNewItem.bind(this);
     }
     render() {
         //fetch from database or somewhere
         return (
-            <div>
+            <div >
                 {super.CreateListOfItems()}
                 <button onClick={e => {this.ShowModal(e);}}>Show Modal</button>
-                {<Modal onClose = {this.ShowModal} show = {this.state.show}>Message</Modal>}
+                {<Modal onClose = {this.ShowModal} show = {this.state.show} name = {this.state.ItemName}>
+                    
+                </Modal>}
             </div>
         )
     }
 
     ShowModal = e => {
+        super.AddNewItem(this.state.name);
         this.setState({
             listOfItems: this.listOfItems,
             show: !this.state.show,
+
         });
     }
 
@@ -81,6 +87,9 @@ class NewMaterial extends Container{
     // }
 }
 
+class ModalItem{
+    name;
+}
 
 class NewMaterialItem{
     constructor(name, index){
