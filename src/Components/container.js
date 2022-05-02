@@ -66,7 +66,7 @@ class NewMaterial extends Container{
             <div >
                 {super.CreateListOfItems()}
                 <button onClick={e => {this.ShowModal(e);}}>Show Modal</button>
-                {<Modal onClose = {this.ShowModal} show = {this.state.show} name = {this.state.ItemName}>
+                {<Modal onClose = {this.ShowModal} show = {this.state.show} onUpdate={this.AddNewItem}>
                     
                 </Modal>}
             </div>
@@ -74,7 +74,6 @@ class NewMaterial extends Container{
     }
 
     ShowModal = e => {
-        super.AddNewItem(this.state.name);
         this.setState({
             listOfItems: this.listOfItems,
             show: !this.state.show,
@@ -82,9 +81,10 @@ class NewMaterial extends Container{
         });
     }
 
-    // AddNewItem(e){
-    //     this.setState({listOfItems: this.listOfItems.push(new NewMaterialItem('test', '4'))})
-    // }
+    
+    AddNewItem(name){
+        super.AddNewItem(new NewMaterialItem(name, 1));
+    }
 }
 
 class ModalItem{

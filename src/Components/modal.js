@@ -18,6 +18,7 @@ export default class Modal extends Component{
     handleSubmit(event){
         alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
+        this.props.onUpdate(this.state.value);
         this.onClose(event);
     }
 
@@ -42,7 +43,6 @@ export default class Modal extends Component{
     }
 
     onClose = e => {
-        this.props.name = this.state.name;
         this.props.onClose && this.props.onClose(e);
     }
 }
