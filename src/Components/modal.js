@@ -49,7 +49,7 @@ export default class Modal extends Component{
                             <input type="text" name="form" value={this.state.form} onChange={this.handleChange} />
                             <br/>
                             Notes:
-                            <textarea name="notes" rows="5" cols="50" value={this.state.form} onChange={this.handleChange} />
+                            <textarea name="notes" type="text" rows="5" cols="20" value={this.state.notes} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Submit" />
                     </form>

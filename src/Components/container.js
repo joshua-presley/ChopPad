@@ -33,6 +33,9 @@ class Container extends Component{
                         <li>
                             Form: {item.form}
                         </li>
+                        <li>
+                            Notes: {item.notes}
+                        </li>
                     </div>
                         
                     )}
