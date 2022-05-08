@@ -8,7 +8,7 @@ import Grid from './Components/grid'
 
 function App() {
 
-  const items = [new NewMaterialItem('test', 'AABA'), new NewMaterialItem('test1', 'ABCD'), new NewMaterialItem('test2', 'ABA')]
+  const items = [new NewMaterialItem('test', 'AABA', 'add your notes here'), new NewMaterialItem('test1', 'ABCD', 'add your notes here'), new NewMaterialItem('test2', 'ABA', 'add your notes here')]
   return (
     <div className="App">
       <Grid newMaterialContainer={<NewMaterial title = 'New Material' listOfItems = {items}/>}/>

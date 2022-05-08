@@ -88,8 +88,8 @@ class NewMaterial extends Container{
     }
 
     
-    AddNewItem(name, form){
-        super.AddNewItem(new NewMaterialItem(name, form));
+    AddNewItem(name, form, notes){
+        super.AddNewItem(new NewMaterialItem(name, form, notes));
     }
 }
 
@@ -98,9 +98,10 @@ class ModalItem{
 }
 
 class NewMaterialItem{
-    constructor(name, form){
+    constructor(name, form, notes){
         this.name = name;
         this.form = form;
+        this.notes = notes;
     }
 }
 

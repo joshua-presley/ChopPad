@@ -7,6 +7,8 @@ export default class Modal extends Component{
         this.state = {
             name: '',
             form: '',
+            notes: '',
+
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,9 +26,8 @@ export default class Modal extends Component{
     }
 
     handleSubmit(event){
-        alert('A name was submitted: ' + this.state.name);
         event.preventDefault();
-        this.props.onUpdate(this.state.name, this.state.form);
+        this.props.onUpdate(this.state.name, this.state.form, this.state.notes);
         this.onClose(event);
     }
 
@@ -46,6 +47,9 @@ export default class Modal extends Component{
                             Form:
                             <br/>
                             <input type="text" name="form" value={this.state.form} onChange={this.handleChange} />
+                            <br/>
+                            Notes:
+                            <textarea name="notes" rows="5" cols="50" value={this.state.form} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Submit" />
                     </form>
