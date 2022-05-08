@@ -26,9 +26,18 @@ class Container extends Component{
                 {this.CreateTitleBar()}
                 <ul>
                     {this.listOfItems.map((item) =>
-                        <li className='NewMaterial' key={item.name}>
-                            {item.name} is at postition {item.index}
+                    <div className='NewMaterial' key={item.name}>
+                        <li>
+                            Title: {item.name} 
                         </li>
+                        <li>
+                            Form: {item.form}
+                        </li>
+                        <li>
+                            Notes: {item.notes}
+                        </li>
+                    </div>
+                        
                     )}
                 </ul>
             </div>
@@ -82,8 +91,8 @@ class NewMaterial extends Container{
     }
 
     
-    AddNewItem(name){
-        super.AddNewItem(new NewMaterialItem(name, 1));
+    AddNewItem(name, form, notes){
+        super.AddNewItem(new NewMaterialItem(name, form, notes));
     }
 }
 
@@ -92,10 +101,10 @@ class ModalItem{
 }
 
 class NewMaterialItem{
-    constructor(name, index){
+    constructor(name, form, notes){
         this.name = name;
-        this.index = index;
-        
+        this.form = form;
+        this.notes = notes;
     }
 }
 

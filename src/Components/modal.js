@@ -4,7 +4,12 @@ export default class Modal extends Component{
 
     constructor(props){
         super(props);
-        this.state = {value: ''};
+        this.state = {
+            name: '',
+            form: '',
+            notes: '',
+
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,13 +17,17 @@ export default class Modal extends Component{
     }
 
     handleChange(event){
-        this.setState({value: event.target.value});
+        const value = event.target.value;
+        this.setState({
+            ...this.state,
+            [event.target.name]: value,
+        }
+        );
     }
 
     handleSubmit(event){
-        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
-        this.props.onUpdate(this.state.value);
+        this.props.onUpdate(this.state.name, this.state.form, this.state.notes);
         this.onClose(event);
     }
 
@@ -32,7 +41,15 @@ export default class Modal extends Component{
                     <form onSubmit={this.handleSubmit}>        
                         <label>
                             Name:
-                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            <br/>
+                            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+                            <br/>
+                            Form:
+                            <br/>
+                            <input type="text" name="form" value={this.state.form} onChange={this.handleChange} />
+                            <br/>
+                            Notes:
+                            <textarea name="notes" type="text" rows="5" cols="20" value={this.state.notes} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Submit" />
                     </form>
