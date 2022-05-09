@@ -22,9 +22,15 @@ class Grid extends Component{
                 <div className = 'DevelopingMaterial'>
                     {this.developingMaterialContainer}
                 </div>
-                <div className = 'PerformanceMaterial'>3</div>
-                <div className = 'Technique'>4</div>
-                <div className = 'Musicianship'>5</div>
+                <div className = 'PerformanceMaterial'>
+                    {this.performanceMaterialContainer}
+                </div>
+                <div className = 'Technique'>
+                    {this.techniqueContainer}
+                </div>
+                <div className = 'Musicianship'>
+                    {this.musicianshipContainer}
+                </div>
             </div>
         )
     }
