@@ -6,6 +6,8 @@ class Grid extends Component{
     constructor(props){
         super(props);
         this.newMaterialContainer = props.newMaterialContainer;
+        this.developingMaterialContainer = props.developingMaterialContainer;
+
     }
 
 
@@ -15,7 +17,9 @@ class Grid extends Component{
                 <div className = 'NewMaterial'>
                     {this.newMaterialContainer}
                 </div>
-                <div className = 'DevelopingMaterial'>2</div>
+                <div className = 'DevelopingMaterial'>
+                    {this.developingMaterialContainer}
+                </div>
                 <div className = 'PerformanceMaterial'>3</div>
                 <div className = 'Technique'>4</div>
                 <div className = 'Musicianship'>5</div>
