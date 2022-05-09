@@ -13,6 +13,9 @@ function App() {
     <div className="App">
       <Grid newMaterialContainer={<Material title = 'New Material' listOfItems = {items}/>} 
             developingMaterialContainer={<Material title = 'Developing Material' listOfItems = {items}/>}
+            performanceMaterialContainer={<Material title = 'Developing Material' listOfItems = {items}/>}
+            techniqueContainer={<Material title = 'Developing Material' listOfItems = {items}/>}
+            musicianshipContainer={<Material title = 'Developing Material' listOfItems = {items}/>}
       />
     </div>
   );

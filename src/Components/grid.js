@@ -7,7 +7,9 @@ class Grid extends Component{
         super(props);
         this.newMaterialContainer = props.newMaterialContainer;
         this.developingMaterialContainer = props.developingMaterialContainer;
-
+        this.performanceMaterialContainer = props.performanceMaterialContainer;
+        this.techniqueContainer = props.techniqueContainer;
+        this.musicianshipContainer = props.musicianshipContainer;
     }
 
 
