@@ -57,7 +57,7 @@ class Container extends Component{
 
 }
 
-class NewMaterial extends Container{
+class Material extends Container{
 
     constructor(props){
         super(props);
@@ -127,7 +127,7 @@ class DevelopingMaterial extends Container{
 
 export {
     Container,
-    NewMaterial,
+    Material,
     NewMaterialItem,
 
 }
