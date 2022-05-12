@@ -17,7 +17,7 @@ class Container extends Component{
 
     CreateTitleBar(){
         return (
-            <h1>{this.title}</h1>
+            <h1 className='title'>{this.title}</h1>
         );
     }    
     CreateListOfItems(){
@@ -26,15 +26,15 @@ class Container extends Component{
                 {this.CreateTitleBar()}
                 <ul>
                     {this.listOfItems.map((item) =>
-                    <div className='NewMaterial' key={item.name}>
+                    <div className='container' key={item.name}>
                         <li>
-                            Title: {item.name} 
+                            <p className='label'>Title: {item.name}</p>
                         </li>
                         <li>
-                            Form: {item.form}
+                            <p className='label'>Form: {item.form}</p>
                         </li>
                         <li>
-                            Notes: {item.notes}
+                            <p className='label'>Notes: {item.notes}</p>
                         </li>
                     </div>
                         

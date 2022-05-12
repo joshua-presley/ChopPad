@@ -16,19 +16,19 @@ class Grid extends Component{
     render(){
         return (
             <div className='grid-container'>
-                <div className = 'NewMaterial'>
+                <div id = 'NewMaterial' className='Material'>
                     {this.newMaterialContainer}
                 </div>
-                <div className = 'DevelopingMaterial'>
+                <div id = 'DevelopingMaterial' className='Material'>
                     {this.developingMaterialContainer}
                 </div>
-                <div className = 'PerformanceMaterial'>
+                <div id = 'PerformanceMaterial' className='Material'>
                     {this.performanceMaterialContainer}
                 </div>
-                <div className = 'Technique'>
+                <div id = 'Technique' className='Material'>
                     {this.techniqueContainer}
                 </div>
-                <div className = 'Musicianship'>
+                <div id = 'Musicianship' className='Material'>
                     {this.musicianshipContainer}
                 </div>
             </div>
