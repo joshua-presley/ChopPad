@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import './modal.css'
 export default class Modal extends Component{
 
     constructor(props){
@@ -38,22 +38,25 @@ export default class Modal extends Component{
         else{
             return (
                 <div>
-                    <form onSubmit={this.handleSubmit}>        
-                        <label>
-                            Name:
-                            <br/>
-                            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
-                            <br/>
-                            Form:
-                            <br/>
-                            <input type="text" name="form" value={this.state.form} onChange={this.handleChange} />
-                            <br/>
-                            Notes:
-                            <textarea name="notes" type="text" rows="5" cols="20" value={this.state.notes} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                    <button onClick={e => { this.onClose(e); }}>Close</button>
+                    <div className="background"/>
+                    <div className="modal">
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                Name:
+                                <br />
+                                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
+                                <br />
+                                Form:
+                                <br />
+                                <input type="text" name="form" value={this.state.form} onChange={this.handleChange} />
+                                <br />
+                                Notes:
+                                <textarea name="notes" type="text" rows="5" cols="20" value={this.state.notes} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                        <button onClick={e => { this.onClose(e); }}>Close</button>
+                    </div>
                 </div>
             );
         }
