@@ -1,0 +1,20 @@
+.modal {
+    position:fixed;
+    height: 30vh;
+    left: 30vw;
+    bottom: 35vh;
+    width: 40vw;
+    opacity: initial;
+    background-color: #36827F;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px;
+}
+.background {
+    position:fixed;
+    bottom:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F9DB6D;
+    opacity: 20%;
+}
