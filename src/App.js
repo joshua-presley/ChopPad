@@ -30,7 +30,8 @@ function App () {
       var musiitems = [];
       let { data, error, status } = await supabase
         .from('material')
-        .select('id, title, form, notes')
+        .select('type, title, form, notes')
+        .eq('owner', ReactSession.get('userid'))
 
       if (error) {
         throw error;
@@ -40,23 +41,23 @@ function App () {
       if (data) {
         data.forEach((row) => {
           console.log('after select');
-          console.log(row.id);
+          console.log(row.type);
           console.log(row.title);
-          switch (row.id){
+          switch (row.type){
             case 1:
-              newitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              newitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
             case 2:
-              devitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              devitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
             case 3:
-              perfitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              perfitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
             case 4: 
-              techitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              techitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
             case 5:
-              musiitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              musiitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
           }
         }
@@ -87,11 +88,11 @@ function App () {
     console.log(newMaterial)
     return (
       <div className="App">
-        <Grid newMaterialContainer={<Material title='New Material' listOfItems={newMaterial} />}
-          developingMaterialContainer={<Material title='Developing Material' listOfItems={developingMaterial} />}
-          performanceMaterialContainer={<Material title='Performance Material' listOfItems={performanceMaterial} />}
-          techniqueContainer={<Material title='Technique' listOfItems={techniqueMaterial} />}
-          musicianshipContainer={<Material title='Musicianship' listOfItems={musicianshipMaterial} />}
+        <Grid newMaterialContainer={<Material title='New Material' listOfItems={newMaterial} id='1'/>}
+          developingMaterialContainer={<Material title='Developing Material' listOfItems={developingMaterial} id='2'/>}
+          performanceMaterialContainer={<Material title='Performance Material' listOfItems={performanceMaterial} id='3'/>}
+          techniqueContainer={<Material title='Technique' listOfItems={techniqueMaterial} id='4'/>}
+          musicianshipContainer={<Material title='Musicianship' listOfItems={musicianshipMaterial} id='5'/>}
         />
       </div>
     )
