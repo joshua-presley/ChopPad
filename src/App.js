@@ -23,7 +23,11 @@ function App () {
   const GetItems = async () => {
     try {
       setLoading(true);
-      var items = [];
+      var newitems = [];
+      var devitems = [];
+      var perfitems = [];
+      var techitems = [];
+      var musiitems = [];
       let { data, error, status } = await supabase
         .from('material')
         .select('id, title, form, notes')
@@ -38,12 +42,32 @@ function App () {
           console.log('after select');
           console.log(row.id);
           console.log(row.title);
-          items.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+          switch (row.id){
+            case 1:
+              newitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              break;
+            case 2:
+              devitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              break;
+            case 3:
+              perfitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              break;
+            case 4: 
+              techitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              break;
+            case 5:
+              musiitems.push(new NewMaterialItem(row.id, row.title, row.form, row.notes));
+              break;
+          }
         }
         );
       }
+      setNewMaterial(newitems);
+      setDevelopingMaterial(devitems);
+      setPerformanceMaterial(perfitems);
+      setTechniqueMaterial(techitems);
+      setMusicianshipMaterial(musiitems);
       setLoading(false);
-      setNewMaterial(items);
     }
     catch {
       throw ("error getting container items");
@@ -53,27 +77,26 @@ function App () {
 
 
   ReactSession.set("userid", '9c097fd9-74e2-4832-ad25-8b3fc0b8f36d');
-  const items = [new NewMaterialItem('test', 'AABA', 'add your notes here'), new NewMaterialItem('test1', 'ABCD', 'add your notes here'), new NewMaterialItem('test2', 'ABA', 'add your notes here')]
     
 
 
-      if(loading){
-        return (<div>loading...</div>)
-      }
-      else {
-        console.log(newMaterial)
-        return (
-          <div className="App">
-            <Grid newMaterialContainer={<Material title='New Material' listOfItems={newMaterial} />}
-              developingMaterialContainer={<Material title='Developing Material' listOfItems={items} />}
-              performanceMaterialContainer={<Material title='Performance Material' listOfItems={items} />}
-              techniqueContainer={<Material title='Technique' listOfItems={items} />}
-              musicianshipContainer={<Material title='Musicianship' listOfItems={items} />}
-            />
-          </div>
-        )
-      }
-  
+  if (loading) {
+    return (<div>loading...</div>)
+  }
+  else {
+    console.log(newMaterial)
+    return (
+      <div className="App">
+        <Grid newMaterialContainer={<Material title='New Material' listOfItems={newMaterial} />}
+          developingMaterialContainer={<Material title='Developing Material' listOfItems={developingMaterial} />}
+          performanceMaterialContainer={<Material title='Performance Material' listOfItems={performanceMaterial} />}
+          techniqueContainer={<Material title='Technique' listOfItems={techniqueMaterial} />}
+          musicianshipContainer={<Material title='Musicianship' listOfItems={musicianshipMaterial} />}
+        />
+      </div>
+    )
+  }
+
 
 }
   
