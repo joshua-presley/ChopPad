@@ -101,7 +101,8 @@ class ModalItem{
 }
 
 class NewMaterialItem{
-    constructor(name, form, notes){
+    constructor(id = 1, name, form, notes){
+        this.id = id;
         this.name = name;
         this.form = form;
         this.notes = notes;
