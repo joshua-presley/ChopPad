@@ -3,8 +3,8 @@ import React from 'react'
 import { ReactDOM } from 'react';
 import { Component, useEffect, useState,  } from 'react';
 import Modal from './modal';
-
-
+import {supabase} from '../helpers/supabaseClient';
+import { ReactSession } from 'react-client-session';
 //This component will hold information for a song to be practiced. perhaps subclass this?
 class Container extends Component{
 
@@ -12,6 +12,7 @@ class Container extends Component{
         super(props);
         this.title = props.title;
         this.listOfItems = props.listOfItems;
+        this.id = props.id
 
     }
 
@@ -44,8 +45,17 @@ class Container extends Component{
         )
     }
 
-    AddNewItem(item){
+    async AddNewItem(item){
         this.listOfItems.push(item);
+        const {data, error} = await supabase
+            .from('material')
+            .insert([{owner: ReactSession.get('userid'), 
+                    title: item.name, 
+                    form: item.form, 
+                    notes: 
+                    item.notes, 
+                    type: this.id
+                }])
     }
     
     render(){
@@ -65,6 +75,7 @@ class Material extends Container{
             listofItems: super.listOfItems,
             show: false,
             name: '',
+            id: super.id,
 
         };
         this.AddNewItem = this.AddNewItem.bind(this);
@@ -92,7 +103,8 @@ class Material extends Container{
 
     
     AddNewItem(name, form, notes){
-        super.AddNewItem(new NewMaterialItem(name, form, notes));
+        super.AddNewItem(new NewMaterialItem(this.id, name, form, notes));
+
     }
 }
 
@@ -101,7 +113,8 @@ class ModalItem{
 }
 
 class NewMaterialItem{
-    constructor(name, form, notes){
+    constructor(id = 1, name, form, notes){
+        this.id = id;
         this.name = name;
         this.form = form;
         this.notes = notes;
