@@ -35,3 +35,7 @@
 ul{
     list-style-type: none;
 }
+.deleteButton {
+    float: left;
+    background-color: red;
+}
