@@ -51,7 +51,7 @@ class Material extends Component{
         this.state = {
             listofItems: props.listOfItems,
             show: false,
-            name: '',
+            name: this.props.title,
             id: props.id,
         };
         this.AddNewItem = this.AddNewItem.bind(this);
@@ -118,7 +118,7 @@ class Material extends Component{
 
     CreateTitleBar(){
         return (
-            <h1 className='title'>{this.title}</h1>
+            <h1 className='title'>{this.state.name}</h1>
         );
     }    
     CreateListOfItems(onRemove){
@@ -128,7 +128,7 @@ class Material extends Component{
                 <ul>
                     {this.state.listofItems.map((item) =>
                     <div className='container' key={item.name}>
-                        <button onClick={() => onRemove(item)} >remove</button>
+                        <button onClick={() => onRemove(item)} className="deleteButton">X</button>
                         <li>
                             <p className='label'>Title: {item.name}</p>
                         </li>
