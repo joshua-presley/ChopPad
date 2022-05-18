@@ -53,7 +53,6 @@ class Material extends Component{
             show: false,
             name: '',
             id: props.id,
-
         };
         this.AddNewItem = this.AddNewItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
@@ -81,33 +80,40 @@ class Material extends Component{
 
     
     async AddNewItem(name, form, notes){
+
+        console.log('adding')
+        console.log(this.state.id);
+
         const item = new NewMaterialItem(this.state.id, name, form, notes);
         this.setState ({
             listofItems: this.state.listofItems.push(item),
 
         })
-        console.log('adding')
         const {data, error} = await supabase
             .from('material')
             .insert([{owner: ReactSession.get('userid'), 
                     title: item.name, 
                     form: item.form, 
                     notes: item.notes, 
-                    type: this.state.id
+                    type: item.id
                 }])
     }
 
     async removeItem(item){
-
-        console.log("removing: " + item.name);
-        console.log (typeof(item.id));
-        //let noJohn = someArray.filter( el => el.name !== "John" ); 
-        
-        this.setState({
-            listofItems: this.state.listofItems.filter(x => x.name !== item.name),
-
-        });
-        console.log(this.listOfItems);
+        try{
+            
+            this.setState({
+                listofItems: this.state.listofItems.filter(x => x.name !== item.name),
+            });
+            console.log('remove ' + ReactSession.get('userid') + ' ' + item.id + ' ' + item.name);
+            const { data, error } = await supabase
+                .from('material')
+                .delete()
+                .match({ owner: ReactSession.get('userid'), type: item.id, title: item.name });
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
     CreateTitleBar(){
@@ -145,7 +151,7 @@ class Material extends Component{
 
 
 class NewMaterialItem{
-    constructor(id = 1, name, form, notes){
+    constructor(id, name, form, notes){
         this.id = id;
         this.name = name;
         this.form = form;
