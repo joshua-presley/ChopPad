@@ -85,7 +85,6 @@ function App () {
     return (<div>loading...</div>)
   }
   else {
-    console.log(newMaterial)
     return (
       <div className="App">
         <Grid newMaterialContainer={<Material title='New Material' listOfItems={newMaterial} id='1'/>}

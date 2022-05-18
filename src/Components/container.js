@@ -16,18 +16,119 @@ class Container extends Component{
 
     }
 
+    
+
+    async AddNewItem(item){
+        this.listOfItems.push(item);
+        console.log('adding')
+        const {data, error} = await supabase
+            .from('material')
+            .insert([{owner: ReactSession.get('userid'), 
+                    title: item.name, 
+                    form: item.form, 
+                    notes: 
+                    item.notes, 
+                    type: this.id
+                }])
+    }
+
+    removeItem(item){
+    }
+    
+    render(){
+        return <Container CreateTitleBar={this.CreateTitleBar()}/>
+    }
+
+    
+
+
+}
+
+class Material extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            listofItems: props.listOfItems,
+            show: false,
+            name: '',
+            id: props.id,
+        };
+        this.AddNewItem = this.AddNewItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+    }
+    render() {
+        //fetch from database or somewhere
+        return (
+            <div >
+                {this.CreateListOfItems(this.removeItem)}
+                <button onClick={e => {this.ShowModal(e);}}>Show Modal</button>
+                {<Modal onClose = {this.ShowModal} show = {this.state.show} onUpdate={this.AddNewItem}>
+                    
+                </Modal>}
+            </div>
+        )
+    }
+
+    ShowModal = e => {
+        this.setState({
+            listofItems: this.state.listofItems,
+            show: !this.state.show,
+
+        });
+    }
+
+    
+    async AddNewItem(name, form, notes){
+
+        console.log('adding')
+        console.log(this.state.id);
+
+        const item = new NewMaterialItem(this.state.id, name, form, notes);
+        this.setState ({
+            listofItems: this.state.listofItems.push(item),
+
+        })
+        const {data, error} = await supabase
+            .from('material')
+            .insert([{owner: ReactSession.get('userid'), 
+                    title: item.name, 
+                    form: item.form, 
+                    notes: item.notes, 
+                    type: item.id
+                }])
+    }
+
+    async removeItem(item){
+        try{
+            
+            this.setState({
+                listofItems: this.state.listofItems.filter(x => x.name !== item.name),
+            });
+            console.log('remove ' + ReactSession.get('userid') + ' ' + item.id + ' ' + item.name);
+            const { data, error } = await supabase
+                .from('material')
+                .delete()
+                .match({ owner: ReactSession.get('userid'), type: item.id, title: item.name });
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
     CreateTitleBar(){
         return (
             <h1 className='title'>{this.title}</h1>
         );
     }    
-    CreateListOfItems(){
+    CreateListOfItems(onRemove){
         return (
             <div>
                 {this.CreateTitleBar()}
                 <ul>
-                    {this.listOfItems.map((item) =>
+                    {this.state.listofItems.map((item) =>
                     <div className='container' key={item.name}>
+                        <button onClick={() => onRemove(item)} >remove</button>
                         <li>
                             <p className='label'>Title: {item.name}</p>
                         </li>
@@ -45,75 +146,12 @@ class Container extends Component{
         )
     }
 
-    async AddNewItem(item){
-        this.listOfItems.push(item);
-        const {data, error} = await supabase
-            .from('material')
-            .insert([{owner: ReactSession.get('userid'), 
-                    title: item.name, 
-                    form: item.form, 
-                    notes: 
-                    item.notes, 
-                    type: this.id
-                }])
-    }
-    
-    render(){
-        return <Container CreateTitleBar={this.CreateTitleBar()}/>
-    }
-
-    
-
-
 }
 
-class Material extends Container{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            listofItems: super.listOfItems,
-            show: false,
-            name: '',
-            id: super.id,
-
-        };
-        this.AddNewItem = this.AddNewItem.bind(this);
-    }
-    render() {
-        //fetch from database or somewhere
-        return (
-            <div >
-                {super.CreateListOfItems()}
-                <button onClick={e => {this.ShowModal(e);}}>Show Modal</button>
-                {<Modal onClose = {this.ShowModal} show = {this.state.show} onUpdate={this.AddNewItem}>
-                    
-                </Modal>}
-            </div>
-        )
-    }
-
-    ShowModal = e => {
-        this.setState({
-            listOfItems: this.listOfItems,
-            show: !this.state.show,
-
-        });
-    }
-
-    
-    AddNewItem(name, form, notes){
-        super.AddNewItem(new NewMaterialItem(this.id, name, form, notes));
-
-    }
-}
-
-class ModalItem{
-    name;
-}
 
 class NewMaterialItem{
-    constructor(id = 1, name, form, notes){
+    constructor(id, name, form, notes){
         this.id = id;
         this.name = name;
         this.form = form;
@@ -121,22 +159,6 @@ class NewMaterialItem{
     }
 }
 
-class DevelopingMaterial extends Container{
-    constructor(props){
-        super(props);
-    }
-
-    
-
-    render(){
-        return (
-            <div>
-                {super.CreateListOfItems()}
-            </div>
-        );
-    }
-    
-}
 
 export {
     Container,
