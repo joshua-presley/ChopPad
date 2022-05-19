@@ -1,7 +1,7 @@
 import './container.css'
 import React from 'react'
-import { ReactDOM } from 'react';
-import { Component, useEffect, useState,  } from 'react';
+//import { ReactDOM } from 'react';
+import { Component, } from 'react';
 import Modal from './modal';
 import {supabase} from '../helpers/supabaseClient';
 import { ReactSession } from 'react-client-session';
@@ -89,7 +89,7 @@ class Material extends Component{
             listofItems: this.state.listofItems.push(item),
 
         })
-        const {data, error} = await supabase
+        await supabase
             .from('material')
             .insert([{owner: ReactSession.get('userid'), 
                     title: item.name, 
@@ -106,7 +106,7 @@ class Material extends Component{
                 listofItems: this.state.listofItems.filter(x => x.name !== item.name),
             });
             console.log('remove ' + ReactSession.get('userid') + ' ' + item.id + ' ' + item.name);
-            const { data, error } = await supabase
+            await supabase
                 .from('material')
                 .delete()
                 .match({ owner: ReactSession.get('userid'), type: item.id, title: item.name });
