@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import Container, { Material, NewMaterialItem } from './Components/container'
+import { Material, NewMaterialItem } from './Components/container'
 import React from 'react';
 import {useState, useEffect} from 'react';
-import ReactDOM from 'react'
+//import ReactDOM from 'react'
 import Grid from './Components/grid'
 import { ReactSession } from 'react-client-session';
 import { supabase } from './helpers/supabaseClient';
@@ -34,7 +34,7 @@ function App () {
         .eq('owner', ReactSession.get('userid'))
 
       if (error) {
-        throw error;
+        throw status;
       }
 
 
@@ -59,6 +59,8 @@ function App () {
             case 5:
               musiitems.push(new NewMaterialItem(row.type, row.title, row.form, row.notes));
               break;
+            default:
+              console.log('data didnt match');
           }
         }
         );
