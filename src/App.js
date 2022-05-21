@@ -72,8 +72,8 @@ function App () {
       setMusicianshipMaterial(musiitems);
       setLoading(false);
     }
-    catch {
-      throw ("error getting container items");
+    catch (error) {
+      throw (error);
     }
   }
 

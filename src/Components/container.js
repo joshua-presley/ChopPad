@@ -21,7 +21,7 @@ class Container extends Component{
     async AddNewItem(item){
         this.listOfItems.push(item);
         console.log('adding')
-        const {data, error} = await supabase
+        await supabase
             .from('material')
             .insert([{owner: ReactSession.get('userid'), 
                     title: item.name, 
