@@ -2,7 +2,7 @@
   "name": "choppad",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://joshua-presley.github.io/ChopPad",
+  "homepage": "https://joshua-presley.github.io/",
   "dependencies": {
     "@supabase/supabase-js": "^1.35.3",
     "@testing-library/jest-dom": "^5.16.4",
